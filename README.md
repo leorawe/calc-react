@@ -1,7 +1,7 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 # React Calculator - coming soon(er or later)  
 Started with adding some of the buttons.  Started the screen.  Thinking through the logic.
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
