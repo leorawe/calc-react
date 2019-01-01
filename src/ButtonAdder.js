@@ -27,12 +27,7 @@ const ButtonAdder = () => {
                     className = {(arr.length-1 === i)? 'operator':'num'}
                     key = {item}
                     />)
-                    //<span 
-                    // {(arr.length-1 === i)
-                    // ? op 
-                    // : ''}
-                    //>{item}</span>)
-                   
+ 
              )}
                
                
