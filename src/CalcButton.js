@@ -3,13 +3,14 @@ import styled from 'styled-components';
 
 const Button = styled.button`
   color: coral; 
-  padding: 0.75rem 0.5rem; 
+  padding: 0.75rem 0; 
   border: solid 2px coral; 
   border-radius: 3px;
   margin: 0.5rem;
   font-size: 1rem;
   width: 50px;
   text-align: center;
+
 `;
 
 class CalcButton extends React.Component {

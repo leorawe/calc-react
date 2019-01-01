@@ -1,10 +1,24 @@
 import React from 'react';
+import styled from 'styled-components';
 
+const CalcScreen = styled.div`
+   background: #708090;
+   border-radius: 10px;
+   box-shadow: inset 0 4px 5px darken(#c30000, 30%);
+   color: #fcfcfc;
+   flex: 3;
+   font-size: 28px;
+   height: 10px;
+   margin: 10px;
+   padding: 20px 10px;
+   text-align: right;
+   line-height: 12px;
+`;
 
 const Screen = (props) => {
    // console.log({props});
       return (
-      <div className="screen"> screen: {props.result}</div>
+      <CalcScreen> {props.result}</CalcScreen>
       );
 };
 

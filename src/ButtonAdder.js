@@ -14,7 +14,6 @@ let rows = [row1, row2, row3];
 const Layout = styled.div`
   display: flex;
   flex-wrap: wrap;
-  width: 300px;
 `;
 const ButtonAdder = () => {
     //const op = 'className="operator"';
@@ -31,7 +30,26 @@ const ButtonAdder = () => {
                     key = {item}
                     />)
              )}
-               
+             <CalcButton 
+                    item = "0"
+                    className = "num"
+                    key = "0"
+                    />
+             <CalcButton 
+                    item = "."
+                    className = "decimal"
+                    key = "."
+                    />
+             <CalcButton 
+                    item = "="
+                    className = "equal"
+                    key = "="
+                    />
+               <CalcButton 
+                    item = "*"
+                    className = "operator"
+                    key = "*"
+                    />                      
                
             
             
