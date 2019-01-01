@@ -1,5 +1,6 @@
 import React from 'react';
 import CalcButton from './CalcButton';
+import styled from 'styled-components';
 const row1 = [7,8,9,'+'];
 const row2 = [4,5,6,'-'];
 const row3 = [1,2,3,'/'];
@@ -10,30 +11,31 @@ let rows = [row1, row2, row3];
 //clear button goes first
 //map numbers 1 to 9
 
-
+const Layout = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 300px;
+`;
 const ButtonAdder = () => {
     //const op = 'className="operator"';
    
     return(
-        <div className="keys">
+        <Layout className="keys">
 
-            
                 {rows.map((row) => 
                     //row goes in here
-                    
                     row.map((item, i, arr) => 
                     <CalcButton 
                     item = {item}
                     className = {(arr.length-1 === i)? 'operator':'num'}
                     key = {item}
                     />)
- 
              )}
                
                
             
             
-        </div>
+        </Layout>
     )
     //add the operators
 
