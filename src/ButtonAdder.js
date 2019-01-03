@@ -27,6 +27,7 @@ const ButtonAdder = () => {
                     <CalcButton 
                     item = {item}
                     className = {(arr.length-1 === i)? 'operator':'num'}
+                    buttonBack = {(arr.length-1 === i)? '#249999':'#2ebdbd'}
                     key = {item}
                     />)
              )}
@@ -44,10 +45,12 @@ const ButtonAdder = () => {
                     item = "="
                     className = "equal"
                     key = "="
+                    buttonBack = "#ceae7f"
                     />
                <CalcButton 
                     item = "*"
                     className = "operator"
+                    buttonBack = "#249999"
                     key = "*"
                     />                      
                

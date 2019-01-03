@@ -5,7 +5,7 @@ import styled from 'styled-components';
 //background: #2ebdbd;
 
 const Button = styled.button`
-  color: white; 
+  color: #eff1e4; 
   padding: 0.75rem 0; 
   border: solid 2px #eff1e4; 
   background-color: ${props => props.buttonBack || '#2ebdbd'};

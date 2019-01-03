@@ -5,7 +5,7 @@ const CalcScreen = styled.div`
    background: #708090;
    border-radius: 10px;
    box-shadow: inset 0 4px 5px #000000;
-   color: #fcfcfc;
+   color: #eff1e4;
    flex: 3;
    font-size: 28px;
    height: 10px;

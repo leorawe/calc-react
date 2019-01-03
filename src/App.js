@@ -4,6 +4,15 @@ import ButtonAdder from './ButtonAdder';
 import CalcButton from './CalcButton';
 import styled from 'styled-components';
 const num = 0;
+const Wrapper = styled.div`
+    background: #537c8e;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 20px;
+`;  
 const Calc = styled.div`
     width: 265px;
     display: flex;
@@ -21,17 +30,19 @@ const Top = styled.div`
 
 const App = () => {
     return (
+        <Wrapper>
          <Calc>
             <Top>
                     <CalcButton 
                     item = "C"
                     className = "clear"
                     key = "c"
-                    buttonBack = "red"
+                    buttonBack = "#ceae7f"
                     /><Screen result={num} />
              </Top>    
              <ButtonAdder class="button-section" />
         </Calc>
+    </Wrapper>   
     );
 };
 
