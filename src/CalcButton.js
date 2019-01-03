@@ -1,9 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-//#52250;
-//background: #2ebdbd;
-
 const Button = styled.button`
   color: #eff1e4; 
   padding: 0.75rem 0; 
@@ -15,16 +12,32 @@ const Button = styled.button`
   font-size: 1rem;
   width: 50px;
   text-align: center;
+  cursor: pointer;
 `;
 
 
 class CalcButton extends React.Component {
   
-    //state = {selected: null};
+    state = {selected: null};
     //onClick="this.setState.something"
+    
+    handleClick = (e) => {
+      e.preventDefault();
+      console.log('clkc', this.props.className);
+      console.log('item', this.props.item);
+      // this.setState(state => ({
+      //    selected: 'clicked'
+      // }));
+    }
     render(){
       return (
-      <Button className={this.props.className} buttonBack={this.props.buttonBack}>{this.props.item} </Button>
+      <Button 
+      className={this.props.className} 
+      buttonBack={this.props.buttonBack}
+      onClick={this.handleClick}
+      >
+      {this.props.item} 
+      </Button>
       );
       }  
 }

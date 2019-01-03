@@ -2,6 +2,9 @@
 Added buttons and the screen.  Thinking through the logic.  
 Used styled-components for theming.  
 
+--> need to organize the styles  
+--> button when selected have blue border - why?
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
