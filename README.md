@@ -1,4 +1,4 @@
-# React Calculator - coming soon(er or later)  
+# React Calculator 
 Added buttons and the screen.  Thinking through the logic.  
 Used styled-components for theming.  
 
