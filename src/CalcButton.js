@@ -18,13 +18,14 @@ const Button = styled.button`
 
 class CalcButton extends React.Component {
   
-    state = {selected: null};
+   // state = {selected: null};
     //onClick="this.setState.something"
     
     handleClick = (e) => {
       e.preventDefault();
       console.log('clkc', this.props.className);
       console.log('item', this.props.item);
+     // this.props.onResultChange(this.props.item);
       // this.setState(state => ({
       //    selected: 'clicked'
       // }));

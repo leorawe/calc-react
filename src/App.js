@@ -27,10 +27,12 @@ const Top = styled.div`
     flex-direction: row;
     margin: 5px 0;
     `;   
-
-const App = () => {
-    return (
-        <Wrapper>
+//change to class and add state
+class App extends React.Component{
+   // state = {selected: null};
+    render (){
+      return(  
+      <Wrapper>
          <Calc>
             <Top>
                     <CalcButton 
@@ -38,12 +40,15 @@ const App = () => {
                     className = "clear"
                     key = "c"
                     buttonBack = "#ceae7f"
-                    /><Screen result={num} />
+                    /><Screen 
+                   // onResultChange = {num}
+                    result={num} />
              </Top>    
              <ButtonAdder class="button-section" />
         </Calc>
     </Wrapper>   
-    );
-};
+      );
+    }
+}
 
 export default App;
