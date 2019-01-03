@@ -29,16 +29,25 @@ const Top = styled.div`
     `;   
 //change to class and add state
 class App extends React.Component{
-   state = {selected: 0};
+   state = {recent: 0};
    // set a callback here - onResultChange
-   onResultChange = (someArg) => {
-       console.log(someArg);
-     this.setState(() => ({selected: someArg}));
+   onResultChange = (newVal) => {
+     //  console.log(someArg);
+     this.setState(() => ({recent: newVal}));
+     //also, do some calculation then add this to state
    };
 
-//    myCallback = (dataFromChild) => {
-//     this.setState({ listDataFromChild: dataFromChild });
-// },
+   onScreen =  () => {
+       //this should be the calculated result instead of recent
+       let val = this.state.recent;
+      switch(val){
+         case 'C':
+            return '0';
+         default:
+            return val;   
+      }
+   }
+
     render (){
       return(  
       <Wrapper>
@@ -51,7 +60,7 @@ class App extends React.Component{
                     buttonBack = "#ceae7f"
                     onResultChange = {this.onResultChange}
                     /><Screen 
-                    result={this.state.selected} />
+                    result={this.onScreen()} />
              </Top>    
              <ButtonAdder 
              onResultChange = {this.onResultChange}
