@@ -3,7 +3,7 @@ import Screen from './Screen';
 import ButtonAdder from './ButtonAdder';
 import CalcButton from './CalcButton';
 import styled from 'styled-components';
-const num = 0;
+
 const Wrapper = styled.div`
     background: #537c8e;
     width: 100vw;
@@ -29,7 +29,16 @@ const Top = styled.div`
     `;   
 //change to class and add state
 class App extends React.Component{
-   // state = {selected: null};
+   state = {selected: 0};
+   // set a callback here - onResultChange
+   onResultChange = (someArg) => {
+       console.log(someArg);
+     this.setState(() => ({selected: someArg}));
+   };
+
+//    myCallback = (dataFromChild) => {
+//     this.setState({ listDataFromChild: dataFromChild });
+// },
     render (){
       return(  
       <Wrapper>
@@ -40,11 +49,13 @@ class App extends React.Component{
                     className = "clear"
                     key = "c"
                     buttonBack = "#ceae7f"
+                    onResultChange = {this.onResultChange}
                     /><Screen 
-                   // onResultChange = {num}
-                    result={num} />
+                    result={this.state.selected} />
              </Top>    
-             <ButtonAdder class="button-section" />
+             <ButtonAdder 
+             onResultChange = {this.onResultChange}
+              />
         </Calc>
     </Wrapper>   
       );

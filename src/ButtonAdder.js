@@ -15,9 +15,9 @@ const Layout = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;
-const ButtonAdder = () => {
+const ButtonAdder = (props) => {
     //const op = 'className="operator"';
-   
+   // console.log(props.onResultChange);
     return(
         <Layout className="keys">
 
@@ -29,29 +29,34 @@ const ButtonAdder = () => {
                     className = {(arr.length-1 === i)? 'operator':'num'}
                     buttonBack = {(arr.length-1 === i)? '#249999':'#2ebdbd'}
                     key = {item}
+                    onResultChange={props.onResultChange}
                     />)
              )}
              <CalcButton 
                     item = "0"
                     className = "num"
                     key = "0"
+                    onResultChange={props.onResultChange}
                     />
              <CalcButton 
                     item = "."
                     className = "decimal"
                     key = "."
+                    onResultChange={props.onResultChange}
                     />
              <CalcButton 
                     item = "="
                     className = "equal"
                     key = "="
                     buttonBack = "#ceae7f"
+                    onResultChange={props.onResultChange}
                     />
                <CalcButton 
                     item = "*"
                     className = "operator"
                     buttonBack = "#249999"
                     key = "*"
+                    onResultChange={props.onResultChange}
                     />                      
                
             

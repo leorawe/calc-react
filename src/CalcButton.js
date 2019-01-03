@@ -23,9 +23,9 @@ class CalcButton extends React.Component {
     
     handleClick = (e) => {
       e.preventDefault();
-      console.log('clkc', this.props.className);
-      console.log('item', this.props.item);
-     // this.props.onResultChange(this.props.item);
+      //console.log('clkc', this.props.onResultChange);
+      //console.log('item', this.props.item);
+      this.props.onResultChange(this.props.item);
       // this.setState(state => ({
       //    selected: 'clicked'
       // }));
