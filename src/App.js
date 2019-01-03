@@ -66,11 +66,11 @@ class App extends React.Component{
             
             //if number
             if(yesNumRecent){
-               // console.log('two together: ',recent.toString() + arg.toString());
-               // console.log('current calc', calculated);
-               // console.log('current recent', this.state.recent);
+                console.log('two together: ',recent.toString() + arg.toString());
+                console.log('current calc', calculated);
+                console.log('current recent', this.state.recent);
                let newCalc = parseFloat(calculated + arg.toString());
-                this.setState(() => ({calculation: newCalc}));
+               this.setState(() => ({calculation: newCalc}));
             }
             else if(yesDecimal){
                 //console.log('with dec', calculated + '.'+ arg.toString());
@@ -89,7 +89,7 @@ class App extends React.Component{
             //if number
             if(yesNumRecent){
                 console.log('decimal added: ',recent.toString() + arg);
-                let newDec = parseFloat(recent.toString() + arg);
+                let newDec = parseFloat(calculated + arg);
                 this.setState(() => ({calculation: newDec}));
             }
             break;
@@ -115,7 +115,7 @@ class App extends React.Component{
 
    onScreen =  () => {
        //this should be the calculated result instead of recent
-       let val = (this.state.calculation===0)? this.state.recent: this.state.calculation;
+       let val = this.state.calculation;
       switch(val){
          case 'C':
             return '0';
