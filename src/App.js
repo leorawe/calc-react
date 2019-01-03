@@ -31,7 +31,7 @@ const Top = styled.div`
 class App extends React.Component{
    state = {
        recent: 0,
-       calculation: null,
+       calculation: 0,
        operator: 0
     };
 
@@ -45,6 +45,12 @@ class App extends React.Component{
    };
 
    doCalculation = (arg) =>{
+    let recent = this.state.recent;
+    let calculated =  this.state.calculation;
+    let regex = /^\d+$/;
+    let regdecimal = /^\.$/;
+    let yesNumRecent = (regex.test(recent));
+    let yesDecimal = (regdecimal.test(recent));
     switch(arg){
         case 0:
         case 1:
@@ -57,15 +63,36 @@ class App extends React.Component{
         case 8:
         case 9:
             //if recent is a number or a decimal
-            console.log(this.state.recent);
-            let recent = this.state.recent;
-            let regex = /^\d+$/;
-            regex.test(recent)? console.log('num'): console.log('other');
-            this.setState(() => ({calculation: arg}));
+            
+            //if number
+            if(yesNumRecent){
+               // console.log('two together: ',recent.toString() + arg.toString());
+               // console.log('current calc', calculated);
+               // console.log('current recent', this.state.recent);
+               let newCalc = parseFloat(calculated + arg.toString());
+                this.setState(() => ({calculation: newCalc}));
+            }
+            else if(yesDecimal){
+                //console.log('with dec', calculated + '.'+ arg.toString());
+                let newDec = parseFloat(calculated + '.'+ arg.toString());
+                this.setState(() => ({calculation: newDec}));
+            }
+            else
+            {
+                 this.setState(() => ({calculation: arg}));
+            }
             break;  
       case 'C':
           this.setState(() => ({calculation: 0}));
           break;
+      case '.':
+            //if number
+            if(yesNumRecent){
+                console.log('decimal added: ',recent.toString() + arg);
+                let newDec = parseFloat(recent.toString() + arg);
+                this.setState(() => ({calculation: newDec}));
+            }
+            break;
       case '+':
       case '-':
       case '*':
@@ -88,7 +115,7 @@ class App extends React.Component{
 
    onScreen =  () => {
        //this should be the calculated result instead of recent
-       let val = (this.state.calculation!=null)? this.state.calculation: this.state.recent;
+       let val = (this.state.calculation===0)? this.state.recent: this.state.calculation;
       switch(val){
          case 'C':
             return '0';
