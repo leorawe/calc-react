@@ -4,12 +4,12 @@ import styled from 'styled-components';
 const CalcScreen = styled.div`
    background: #708090;
    border-radius: 10px;
-   box-shadow: inset 0 4px 5px darken(#c30000, 30%);
+   box-shadow: inset 0 4px 5px #000000;
    color: #fcfcfc;
    flex: 3;
    font-size: 28px;
    height: 10px;
-   margin: 10px;
+   margin: 5px;
    padding: 20px 10px;
    text-align: right;
    line-height: 12px;

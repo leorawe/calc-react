@@ -8,12 +8,15 @@ const Calc = styled.div`
     width: 265px;
     display: flex;
     flex-direction: column;
-    background: #CD853F;
+    background: #85583f;
     border-radius: 5px;
+    padding-bottom: 10px;
+    box-shadow: 0 4px 1px #1F0000;
     `;
 const Top = styled.div`
     display: flex;
     flex-direction: row;
+    margin: 5px 0;
     `;   
 
 const App = () => {
@@ -24,6 +27,7 @@ const App = () => {
                     item = "C"
                     className = "clear"
                     key = "c"
+                    buttonBack = "red"
                     /><Screen result={num} />
              </Top>    
              <ButtonAdder class="button-section" />
