@@ -1,5 +1,6 @@
 # React Calculator - coming soon(er or later)  
-Started with adding some of the buttons.  Started the screen.  Thinking through the logic.
+Added buttons and the screen.  Thinking through the logic.  
+Used styled-components for theming.  
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
