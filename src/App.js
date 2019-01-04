@@ -52,11 +52,13 @@ class App extends React.Component{
    doCalculation = (arg) =>{
     let recent = this.state.recent;
     let calculated =  this.state.calculation;
+    let op = this.state.operator;
     let regex = /^\d+$/;
     let regdecimal = /^\.$/;
     let yesNumRecent = (regex.test(recent));
     let yesDecimal = (regdecimal.test(recent));
     switch(arg){
+        
         case 0:
         case 1:
         case 2:
@@ -91,10 +93,11 @@ class App extends React.Component{
             }
             break;  
       case 'C':
-          this.setState(() => ({calculation: 0}));
-          this.setState(() => ({finalcalc: []}));
-          this.setState(() => ({operator: null}));
-          this.setState(() => ({recent: 0}));
+        //   this.setState(() => ({calculation: 0}));
+        //   this.setState(() => ({finalcalc: []}));
+        //   this.setState(() => ({operator: null}));
+        //   this.setState(() => ({recent: 0}));
+          this.doInit();
           break;
       case '.':
             //if number
@@ -125,15 +128,24 @@ class App extends React.Component{
            console.log('B4 op: recent vs calculated', recent,' - ', calculated);
            let operated = this.doOperation(this.state.operator, calculated, this.state.finalcalc);
            console.log(operated);   
-        //  this.setState(() => ({finalcalc: operated})); 
+            if(operated==="n/a"){
+                //do init
+                console.log("zero");
+                this.addCalculation(operated);
+            }
+            else{
             this.addCalculation(operated);
             this.setState(() => ({calculation: operated}));
-        // this.setState(prevState => ({
-        //     finalcalc: [...prevState.finalcalc, operated]
-        //   }));
-          //console.log('array? = spot', this.state.finalcalc);   
-          // console.log(operated);  
+            }
           break;
+      case '0':
+      console.log(typeof(arg));
+      console.log(typeof(op));
+      if (op === '/') {
+          console.log('do not divide by zero');
+          this.doInit("n/a");
+      }
+      break;
       default:
           break;
    }
@@ -156,7 +168,7 @@ class App extends React.Component{
         }
        let interim = (this.state.calculation).toFixed(2).replace(/\.?0*$/g,'');
        let recent = this.state.recent;
-       //result.toFixed(2).replace(/\.?0*$/g,'');
+       //console.log(typeof(recent));
       switch(recent){
          case 'C':
             return '0';
@@ -166,10 +178,12 @@ class App extends React.Component{
       case '/':
             console.log('interim', this.state.calculation);
             console.log('final', final);
-            return final;  
-         case '=':
-            return final;    
-         default:
+            return final;   
+      case '=':
+            return final; 
+      case 'n/a':
+            return "n/a";     
+      default:
             return interim;   
       }
    }
@@ -199,11 +213,25 @@ class App extends React.Component{
           case '*':
              return (parseFloat(rec) * parseFloat(val));  
           case '/':
-             return (parseFloat(val) / parseFloat(rec));  
+             console.log(typeof(rec));
+             if(rec===0){
+                 //this.doInit();
+                 return "n/a";
+             }
+             else
+                {return (parseFloat(val) / parseFloat(rec));  }
           default:
              console.log('huh? = might be');
              return parseFloat(this.state.calculation); 
        }
+   }
+
+   doInit(screen=0){
+       console.log(screen);
+    this.setState(() => ({calculation: 0}));
+    this.setState(() => ({finalcalc: []}));
+    this.setState(() => ({operator: null}));
+    this.setState(() => ({recent: screen}));
    }
 
     render (){
