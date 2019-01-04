@@ -106,14 +106,15 @@ class App extends React.Component{
           this.setState(() => ({operator: arg}));
          // console.log('what is this - op???', this.state.operator);
         //  console.log(this.state.calculation);
-         if(this.state.finalcalc===0)
-            {this.setState(() => ({finalcalc: calculated}));}
+        if(this.state.finalcalc===0){
+            this.setState(() => ({finalcalc: calculated}));
+        }
           break;
       case '=':
             //do operations here
            let operated = this.doOperation(this.state.operator, recent, this.state.finalcalc);
           // console.log(operated);   
-           this.setState({finalcalc: operated});   
+          this.setState(() => ({finalcalc: operated})); 
            //console.log('here', this.state.finalcalc);   
           // console.log(operated);  
           break;
@@ -124,8 +125,8 @@ class App extends React.Component{
 
    onScreen =  () => {
        //this should be the calculated result instead of recent
-       let val = this.state.finalcalc;
-       let val2 = this.state.calculation;
+       let final = this.state.finalcalc;
+       let interim = this.state.calculation;
        let recent = this.state.recent;
       switch(recent){
          case 'C':
@@ -136,11 +137,11 @@ class App extends React.Component{
       case '/':
             console.log('interim', this.state.calculation);
             console.log('final', this.state.finalcalc);
-            return val2;  
+            return final;  
          case '=':
-            return val;    
+            return final;    
          default:
-            return val2;   
+            return interim;   
       }
    }
 
