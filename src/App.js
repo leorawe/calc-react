@@ -33,8 +33,12 @@ class App extends React.Component{
        recent: 0,
        calculation: 0,
        operator: null,
-       finalcalc: 0
+       finalcalc: []
     };
+
+    addCalculation(newCalc) {
+        this.setState({ finalcalc: [...this.state.finalcalc, newCalc]})
+      }
 
    // set a callback here - onResultChange
    onResultChange = (newVal) => {
@@ -65,29 +69,30 @@ class App extends React.Component{
         case 9:
             //if recent is a number or a decimal
             
-            //if number
-            if(yesNumRecent){
-                console.log('two together: ',recent.toString() + arg.toString());
-                console.log('current calc', calculated);
-                console.log('current recent', this.state.recent);
-               let newCalc = parseFloat(calculated + arg.toString());
-               this.setState(() => ({calculation: newCalc}));
-            }
-            else if(yesDecimal){
+            if(yesDecimal)
+                {
                 //console.log('with dec', calculated + '.'+ arg.toString());
                 let newDec = parseFloat(calculated + '.'+ arg.toString());
                 this.setState(() => ({calculation: newDec}));
-            }
-            else
-            {
-                 console.log('arg ', arg, ' recent ', recent);
+                }
+             else if(yesNumRecent)
+              {
+  //            console.log('two together: ',recent.toString() + arg.toString());
+           //     console.log('current calc', calculated);
+            //    console.log('current recent', this.state.recent);
+               let newCalc = parseFloat(calculated + arg.toString());
+               this.setState(() => ({calculation: newCalc}));
+                 }
+               else   
+               {
+           //      console.log('arg else - probably was op in between', arg, ' recent ', recent);
                  this.setState(() => ({calculation: arg}));
-                 console.log('calc is ', this.state.calculation)
+          //       console.log('calc is ', this.state.calculation)
             }
             break;  
       case 'C':
           this.setState(() => ({calculation: 0}));
-          this.setState(() => ({finalcalc: 0}));
+          this.setState(() => ({finalcalc: []}));
           this.setState(() => ({operator: null}));
           this.setState(() => ({recent: 0}));
           break;
@@ -96,6 +101,7 @@ class App extends React.Component{
             if(yesNumRecent){
                 console.log('decimal added: ',recent.toString() + arg);
                 let newDec = parseFloat(calculated + arg);
+                console.log('decimal make sense?: ',newDec);
                 this.setState(() => ({calculation: newDec}));
             }
             break;
@@ -103,19 +109,29 @@ class App extends React.Component{
       case '-':
       case '*':
       case '/':
+
+          this.addCalculation(calculated);
+          console.log('calculated is:', calculated);
           this.setState(() => ({operator: arg}));
-         // console.log('what is this - op???', this.state.operator);
-        //  console.log(this.state.calculation);
-        if(this.state.finalcalc===0){
-            this.setState(() => ({finalcalc: calculated}));
-        }
+       
+          console.log('array? op', this.state.finalcalc); 
+        
           break;
       case '=':
+           //reset calculation to zero
+           
+         //put last number into finacalc array
             //do operations here
-           let operated = this.doOperation(this.state.operator, recent, this.state.finalcalc);
-          // console.log(operated);   
-          this.setState(() => ({finalcalc: operated})); 
-           //console.log('here', this.state.finalcalc);   
+           console.log('B4 op: recent vs calculated', recent,' - ', calculated);
+           let operated = this.doOperation(this.state.operator, calculated, this.state.finalcalc);
+           console.log(operated);   
+        //  this.setState(() => ({finalcalc: operated})); 
+            this.addCalculation(operated);
+            this.setState(() => ({calculation: operated}));
+        // this.setState(prevState => ({
+        //     finalcalc: [...prevState.finalcalc, operated]
+        //   }));
+          //console.log('array? = spot', this.state.finalcalc);   
           // console.log(operated);  
           break;
       default:
@@ -125,9 +141,22 @@ class App extends React.Component{
 
    onScreen =  () => {
        //this should be the calculated result instead of recent
-       let final = this.state.finalcalc;
-       let interim = this.state.calculation;
+       let final = 0;
+       if(this.state.finalcalc.length===0){
+           final = 0;
+       }
+       else 
+       {
+        //get last item of the array - probably need to figure out how many items   
+        let finalarr= this.state.finalcalc;
+ //       console.log('b4 operation ',finalarr);
+        final = (finalarr[finalarr.length -1]).toFixed(2).replace(/\.?0*$/g,'');
+  //      console.log('b4 op - what is final', final);
+           //final = (this.state.finalcalc)[0].toFixed(2).replace(/\.?0*$/g,'');
+        }
+       let interim = (this.state.calculation).toFixed(2).replace(/\.?0*$/g,'');
        let recent = this.state.recent;
+       //result.toFixed(2).replace(/\.?0*$/g,'');
       switch(recent){
          case 'C':
             return '0';
@@ -136,7 +165,7 @@ class App extends React.Component{
       case '*':
       case '/':
             console.log('interim', this.state.calculation);
-            console.log('final', this.state.finalcalc);
+            console.log('final', final);
             return final;  
          case '=':
             return final;    
@@ -146,20 +175,34 @@ class App extends React.Component{
    }
 
    doOperation = (op,rec, calcu) => {
+       console.log('calcu b4 operation', calcu);
+       let val;
+       if(calcu.length===0){
+           val = 0;
+       }
+       else 
+       {
+        //get last item of the array - probably need to figure out how many items   
+           val = (calcu[calcu.length -1]).toFixed(2).replace(/\.?0*$/g,'');
+          }
+
        switch(op) {
            case '+':
-               console.log('recent', parseFloat(rec));
-              console.log('calculation foo', parseFloat(calcu));
-              return (parseFloat(calcu) + parseFloat(rec));
+           console.log('recent', parseFloat(rec));
+           console.log('calculation +', parseFloat(val));
+              
+              return (parseFloat(val) + parseFloat(rec));
            case '-':
-             return (parseFloat(calcu) - parseFloat(rec));
+              console.log('recent', parseFloat(rec));
+              console.log('calculation minus', parseFloat(val));
+             return (parseFloat(val) - parseFloat(rec));
           case '*':
-             return (parseFloat(rec) * parseFloat(calcu));  
+             return (parseFloat(rec) * parseFloat(val));  
           case '/':
-             return (parseFloat(calcu) / parseFloat(rec));
+             return (parseFloat(val) / parseFloat(rec));  
           default:
-             console.log('huh?');
-             return 0; 
+             console.log('huh? = might be');
+             return parseFloat(this.state.calculation); 
        }
    }
 
