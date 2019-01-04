@@ -32,7 +32,8 @@ class App extends React.Component{
    state = {
        recent: 0,
        calculation: 0,
-       operator: 0
+       operator: null,
+       finalcalc: 0
     };
 
    // set a callback here - onResultChange
@@ -79,11 +80,16 @@ class App extends React.Component{
             }
             else
             {
+                 console.log('arg ', arg, ' recent ', recent);
                  this.setState(() => ({calculation: arg}));
+                 console.log('calc is ', this.state.calculation)
             }
             break;  
       case 'C':
           this.setState(() => ({calculation: 0}));
+          this.setState(() => ({finalcalc: 0}));
+          this.setState(() => ({operator: null}));
+          this.setState(() => ({recent: 0}));
           break;
       case '.':
             //if number
@@ -97,35 +103,63 @@ class App extends React.Component{
       case '-':
       case '*':
       case '/':
-         //console.log(arg);
-          //let newSum = parseFloat(this.state.recent) + parseFloat(this.state.calculation);
           this.setState(() => ({operator: arg}));
-          console.log(this.state.operator);
+         // console.log('what is this - op???', this.state.operator);
+        //  console.log(this.state.calculation);
+         if(this.state.finalcalc===0)
+            {this.setState(() => ({finalcalc: calculated}));}
           break;
       case '=':
-            console.log('op', arg, this.state.calculation);
             //do operations here
-           // let newSum = parseFloat(this.state.recent) + parseFloat(this.state.calculation);
-               
+           let operated = this.doOperation(this.state.operator, recent, this.state.finalcalc);
+          // console.log(operated);   
+           this.setState({finalcalc: operated});   
+           //console.log('here', this.state.finalcalc);   
+          // console.log(operated);  
           break;
       default:
-          this.setState(() => ({calculation: arg}));
+          break;
    }
  }
 
    onScreen =  () => {
        //this should be the calculated result instead of recent
-       let val = this.state.calculation;
-      switch(val){
+       let val = this.state.finalcalc;
+       let val2 = this.state.calculation;
+       let recent = this.state.recent;
+      switch(recent){
          case 'C':
             return '0';
-         case '+':
-            return val;  
+      case '+':
+      case '-':
+      case '*':
+      case '/':
+            console.log('interim', this.state.calculation);
+            console.log('final', this.state.finalcalc);
+            return val2;  
          case '=':
             return val;    
          default:
-            return val;   
+            return val2;   
       }
+   }
+
+   doOperation = (op,rec, calcu) => {
+       switch(op) {
+           case '+':
+               console.log('recent', parseFloat(rec));
+              console.log('calculation foo', parseFloat(calcu));
+              return (parseFloat(calcu) + parseFloat(rec));
+           case '-':
+             return (parseFloat(calcu) - parseFloat(rec));
+          case '*':
+             return (parseFloat(rec) * parseFloat(calcu));  
+          case '/':
+             return (parseFloat(calcu) / parseFloat(rec));
+          default:
+             console.log('huh?');
+             return 0; 
+       }
    }
 
     render (){
