@@ -3,8 +3,7 @@ Added buttons and the screen.  Thinking through the logic: get n/a when try to d
 Decimals work.  
 Used styled-components for theming.  
 
---> need to organize the styles  
 --> button when selected have blue border - why?
---> deploy - where?
+--> deploy - to netlify  
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
